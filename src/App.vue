@@ -4,9 +4,9 @@
     <router-link to="/about">About</router-link>
 	<br />
 	<br />
-	<button>测试</button>
+	<button v-on:click="testClick()">测试</button>
   <!--
-  <button v-on:click="testLogin()">测试axios</button>
+	<button v-on:click="testClick()">测试</button>
   -->
 	
   </div>
@@ -26,6 +26,20 @@
 		}	
 	}
   */
+
+
+	export default {
+		methods: {
+			testClick: function testClick() {
+        this.$sensors.track('buy', {
+            ProductName: "MacBook Pro", 
+            ProductPrice: 123.45, 
+            IsAddedToFav: false,
+        });
+			}
+		}	
+	}
+
 
 
 </script>
