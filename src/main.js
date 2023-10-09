@@ -42,8 +42,8 @@ sensors.init({
   heatmap: {
     // 是否开启点击图， default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭。
     clickmap: 'default',
-    // 是否开启触达图，not_collect 表示关闭，不会自动采集 $WebStay 事件，可以设置 'default' 表示开启。
-    scroll_notice_map: 'default'
+    // 是否开启触达图， not_collect 表示关闭，不会自动采集 $WebStay 事件，可以设置 'default' 表示开启。
+    scroll_notice_map: 'not_collect'
   }
 })
 //part_url 配置 sensorsdata.cn 和 example.com 后，会在神策分析环境中实现用户统一，从而实现跨域打通
