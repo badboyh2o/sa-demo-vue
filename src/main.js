@@ -9,6 +9,25 @@ const app = createApp(App).use(router)
 // 引入sdk
 var sensors = require('sa-sdk-javascript');
 
+// 使用内置插件 https://manual.sensorsdata.cn/sa/latest/zh_cn/web-17571615.html
+// https://github.com/sensorsdata/sa-sdk-javascript/tree/master/dist/web/plugin/pageleave
+// sensors.use('PageLeave', option);
+sensors.use('PageLeave', {
+  // custom_props：页面浏览时长自定义属性。 类型：Object，可选。
+  // heartbeat_interval_time：心跳记录刷新时间。 类型：Number ，单位：秒 ，默认：5，范围：大于 0，可选。
+  // max_duration：最大页面浏览时长。 类型：Number ，单位：秒 ，默认：432000 (5天) ，范围：大于 0，可选。
+  // isCollectUrl：设置是否采集当前页面浏览时长。 类型：Function 。必须为具有返回值的 Function，返回 true 为需要采集，返回 false 或者不返回则为不采集。可选。
+  custom_props: {
+    prop1: 'value1'
+  },
+  heartbeat_interval_time: 5,
+  max_duration: 5 * 24 * 60 * 60,
+  isCollectUrl: function(url){
+    console.log(url)
+    return true
+  }
+});
+
 // 初始化
 sensors.init({
   server_url: 'http://81.69.254.141:2002/sa.gif?project=test',//数据接收地址，后台：http://localhost:2001/api/sa/data?project=test
