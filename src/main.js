@@ -2,12 +2,23 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import sensors  from 'sa-sdk-javascript'
+import sessionEvent  from 'sa-sdk-javascript/dist/web/plugin/session-event/index.es6.js';
+
+
+// step 1: npm install sa-sdk-javascript
+
+
 // const app = createApp(App).use(router).mount('#app')
 const app = createApp(App).use(router)
 
 
-// 引入sdk
-var sensors = require('sa-sdk-javascript');
+// step 2：使用sa 插件
+
+// 使用外置插件  https://manual.sensorsdata.cn/sa/latest/zh_cn/web-17571615.html
+// 外置插件需要手动集成插件，并手动使用。例如：使用外置的 session-event 插件
+sensors.use(sessionEvent);
+
 
 // 使用内置插件 https://manual.sensorsdata.cn/sa/latest/zh_cn/web-17571615.html
 // https://github.com/sensorsdata/sa-sdk-javascript/tree/master/dist/web/plugin/pageleave
@@ -28,7 +39,10 @@ sensors.use('PageLeave', {
   }
 });
 
-// 初始化
+
+
+
+// step 3：初始化
 sensors.init({
   server_url: 'http://81.69.254.141:2002/sa.gif?project=test',//数据接收地址，后台：http://localhost:2001/api/sa/data?project=test
   is_track_single_page: true, // 单页面配置，默认开启，若页面中有锚点设计，需要将该配置删除，否则触发锚点会多触发 $pageview 事件
@@ -58,7 +72,7 @@ sensors.use('SiteLinker',
 });
 
 
-// 3.注册公共属性
+// 注册公共属性
 sensors.registerPage({
   branch_code: '54001',
   referrer: document.referrer
@@ -76,7 +90,7 @@ sensors.loginWithKey('$identity_login_id','user_123456789');
 sensors.bind("$identity_mobile","187****8991")
 
 
-// 4. 自动收集页面浏览事件 $pageview ，以及设置初始来源。第二个参数可配置附加的属性
+// 自动收集页面浏览事件 $pageview ，以及设置初始来源。第二个参数可配置附加的属性
 sensors.quick('autoTrack', {
     platform: 'h5'
 })
