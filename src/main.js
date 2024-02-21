@@ -88,6 +88,8 @@ sensors.logout();
 sensors.loginWithKey('$identity_login_id','user_123456789');
 // 绑定其他用户标识
 sensors.bind("$identity_mobile","187****8991")
+// 解绑其他用户标识
+// sensors.unbind('$identity_mobile', "187****8991")
 
 
 // 自动收集页面浏览事件 $pageview ，以及设置初始来源。第二个参数可配置附加的属性
