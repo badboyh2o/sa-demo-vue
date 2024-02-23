@@ -85,8 +85,9 @@ sensors.registerPage({
 
 // 测试 id mapping3.0 login
 sensors.logout();
-// 非必须：不调用登录api，事件数据就没有该ID
+// 非必须。当不调用登录api，事件数据就没有该ID，且 distinct_id 总是匿名ID ！！！
 sensors.loginWithKey('$identity_login_id','user_123456789');
+
 // 绑定其他用户标识
 sensors.bind("$identity_mobile","187****8991")
 // 解绑其他用户标识
